@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DA255B3D2166E00700AA18EF /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA255B3C2166E00700AA18EF /* MenuBar.swift */; };
 		DA6EE589215C62290026C5BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6EE588215C62290026C5BC /* AppDelegate.swift */; };
 		DA6EE58B215C62290026C5BC /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA6EE58A215C62290026C5BC /* HomeController.swift */; };
 		DA6EE58E215C62290026C5BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA6EE58C215C62290026C5BC /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DA255B3C2166E00700AA18EF /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		DA6EE585215C62290026C5BC /* YouTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YouTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DA6EE588215C62290026C5BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DA6EE58A215C62290026C5BC /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -58,8 +60,8 @@
 		DA6EE587215C62290026C5BC /* YouTube */ = {
 			isa = PBXGroup;
 			children = (
-				DAF0CE9A21659FCD005FB128 /* Controller */,
 				DAF0CE9721659F6D005FB128 /* View */,
+				DAF0CE9A21659FCD005FB128 /* Controller */,
 				DAF0CE9421659ECF005FB128 /* Helpers */,
 				DA6EE588215C62290026C5BC /* AppDelegate.swift */,
 				DA6EE58C215C62290026C5BC /* Main.storyboard */,
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				DAF0CE9821659F98005FB128 /* VideoCell.swift */,
+				DA255B3C2166E00700AA18EF /* MenuBar.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 				DAF0CE9921659F98005FB128 /* VideoCell.swift in Sources */,
 				DAF0CE9621659EEE005FB128 /* Extensions.swift in Sources */,
 				DA6EE589215C62290026C5BC /* AppDelegate.swift in Sources */,
+				DA255B3D2166E00700AA18EF /* MenuBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

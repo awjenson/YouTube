@@ -8,13 +8,24 @@
 
 import UIKit
 
-// Layout - Custom Class
-class VideoCell: UICollectionViewCell {
-    // Everytime we call dequeueReusableCell, the code below gets called if it needs a new cell
+class BaseCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
     }
+
+    func setupViews() {
+
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+}
+
+// Layout - Custom Class
+class VideoCell: BaseCell {
+    // Everytime we call dequeueReusableCell, the code below gets called if it needs a new cell
 
     let thumbnailImageView: UIImageView = {
         let imageView = UIImageView()
@@ -54,7 +65,7 @@ class VideoCell: UICollectionViewCell {
         return textView
     }()
 
-    func setupViews() {
+    override func setupViews() {
 
         // add superviews for any constraints
         addSubview(thumbnailImageView)
@@ -108,8 +119,6 @@ class VideoCell: UICollectionViewCell {
 
     }
 
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+
 }
 
