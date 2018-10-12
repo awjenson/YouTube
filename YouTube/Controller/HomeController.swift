@@ -11,8 +11,86 @@ import UIKit
 // To change cell sizes we must conform to UICollectionViewDelegateFlowLayout
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
+//    var videos: [Video] = {
+//        var kanyeChannel = Channel()
+//        kanyeChannel.name = "KanyeIsTheBestChannel"
+//        kanyeChannel.profileImageName = "kanye_profile"
+//
+//        var blankSpaceVideo = Video()
+//        blankSpaceVideo.title = "Taylor Swift - Blank Space"
+//        blankSpaceVideo.thumbnailImageName = "taylor_swift_blank_space"
+//        blankSpaceVideo.channel = kanyeChannel
+//        blankSpaceVideo.numberOfViews = 11110002
+//
+//        var badBloodVideo = Video()
+//        badBloodVideo.title = "Taylor Swift - Bad Blood featuring Kendrick Lamar"
+//        badBloodVideo.thumbnailImageName = "taylor_swift_bad_blood"
+//        badBloodVideo.channel = kanyeChannel
+//        badBloodVideo.numberOfViews = 38488383
+//
+//        return [blankSpaceVideo, badBloodVideo]
+//    }()
+
+    var videos: [Video]? // it could be nothing
+
+    func fetchVideos() {
+        let url = URL(string: "https://s3-us-west-2.amazonaws.com/youtubeassets/home.json")
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+
+            if error != nil {
+                print(error)
+                return
+            }
+
+            // if success
+
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+
+                // Construct Video objects from json file
+                self.videos = [Video]()
+
+                for dictionary in json as! [[String: AnyObject]] {
+
+                    print(dictionary["title"])
+
+                    let video = Video()
+                    video.title = dictionary["title"] as? String
+                    video.thumbnailImageName = dictionary["thumbnail_image_name"] as? String
+
+                    let channelDictionary = dictionary["channel"] as! [String: AnyObject]
+
+                    let channel = Channel()
+                    channel.name = channelDictionary["name"] as? String
+                    channel.profileImageName = channelDictionary["profile_image_name"] as? String
+
+
+                    video.channel = channel
+
+                    self.videos?.append(video)
+
+                }
+
+                print("***")
+                print(self.videos?.count)
+
+                // main thread?
+                DispatchQueue.main.async(execute: {
+                    self.collectionView?.reloadData()
+                })
+
+
+            } catch let jsonError {
+                print(jsonError)
+            }
+
+        }.resume()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        fetchVideos()
 
         navigationItem.title = "Home"
         navigationController?.navigationBar.isTranslucent = false
@@ -24,6 +102,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationItem.titleView = titleLabel
 
         collectionView?.backgroundColor = UIColor.white
+
         collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
 
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
@@ -72,19 +151,23 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+
+        // videos is optional
+        return videos?.count ?? 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
 
-
+        // videos is optional
+        cell.video = videos?[indexPath.item]
+        
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let height = (view.frame.width - 16 - 16) * 9 / 16
-        return CGSize(width: view.frame.width, height: height + 16 + 68) // 68 based on Verticle constraints (8,16,44)
+        return CGSize(width: view.frame.width, height: height + 16 + 88) // 68 based on Verticle constraints (8,16,44)
     }
 
     // remove extra spacing between cells
