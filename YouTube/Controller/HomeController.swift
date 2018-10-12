@@ -74,7 +74,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 print("***")
                 print(self.videos?.count)
 
-                // main thread?
+                // main thread for UI
                 DispatchQueue.main.async(execute: {
                     self.collectionView?.reloadData()
                 })
