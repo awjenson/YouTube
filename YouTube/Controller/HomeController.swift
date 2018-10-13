@@ -125,8 +125,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 
     }
 
-    @objc func handleMore() {
+    let settingsLauncher = SettingsLauncher()
 
+    @objc func handleMore() {
+        // show menu
+        settingsLauncher.showSettings()
     }
 
     let menuBar: MenuBar = {
@@ -139,7 +142,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
         view.addConstraintsWithFormat(format: "V:|[v0(50)]|", views: menuBar)
     }
-
 
 
     func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
