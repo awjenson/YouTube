@@ -46,6 +46,8 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
         ]
     }()
 
+    var homeController: HomeController?
+
     func showSettings() {
         // show menu
         // UIApplication.shared.keyWindow is the entire iphone screen
@@ -76,12 +78,12 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
                 self.collectionView.frame = CGRect(x: 0, y: yValue, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
 
             }, completion: nil)
-
         }
     }
 
-    @objc func handleDismiss() {
-        UIView.animate(withDuration: 0.5) {
+    @objc func handleDismiss(_ setting: Setting) {
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+
             self.blackView.alpha = 0
 
             // we want to get the y-value to equal the window of the iphone screen
@@ -89,6 +91,11 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
                 self.collectionView.frame = CGRect(x: 0, y: window.frame.height, width: self.collectionView.frame.width, height: self.collectionView.frame.height)
             }
 
+        }) { (completed: Bool) in
+            // != "" dismisses when we tap off of the menu
+            if setting.name != "" && setting.name != "Cancel" {
+                self.homeController?.showControllerForSetting(setting)
+            }
         }
     }
 
@@ -113,6 +120,12 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         // reduces the default gap between the cells
         return 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+        let setting = self.settings[indexPath.item]
+        handleDismiss(setting)
     }
 
     override init() {

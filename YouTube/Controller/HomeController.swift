@@ -125,11 +125,30 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 
     }
 
-    let settingsLauncher = SettingsLauncher()
+    // Any time you use a lazy var instanciation, the block of code only gets called once if this variable, settingsLauncher, is nil
+    lazy var settingsLauncher: SettingsLauncher = {
+        let launcher = SettingsLauncher()
+        launcher.homeController = self
+        return launcher
+    }()
+
+
 
     @objc func handleMore() {
         // show menu
+        // TODO: Use this code for Self-app's Now VC
         settingsLauncher.showSettings()
+    }
+
+    func showControllerForSetting(_ setting: Setting) {
+        let dummySettingsViewController = UIViewController()
+        dummySettingsViewController.view.backgroundColor = UIColor.white
+        dummySettingsViewController.navigationItem.title = setting.name
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+
+
+        navigationController?.pushViewController(dummySettingsViewController, animated: true)
     }
 
     let menuBar: MenuBar = {
@@ -142,6 +161,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
         view.addConstraintsWithFormat(format: "V:|[v0(50)]|", views: menuBar)
     }
+
+
 
 
     func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
