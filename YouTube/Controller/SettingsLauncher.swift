@@ -10,14 +10,23 @@ import UIKit
 
 // create a class that acts as our model object for each of the settings
 class Setting: NSObject {
-    let name: String
+    let name: SettingName
     let imageName: String
 
     // need to initialize the stored properties
-    init(name: String, imageName: String) {
+    init(name: SettingName, imageName: String) {
         self.name = name
         self.imageName = imageName
     }
+}
+
+enum SettingName: String {
+    case Cancel = "Cancel"
+    case Settings = "Settings"
+    case TermsPrivacy = "Terms & Privacy"
+    case SendFeedback = "Send Feedback"
+    case Help = "Help"
+    case SwitchAccount = "Switch Account"
 }
 
 class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
@@ -37,12 +46,12 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
 
     let settings: [Setting] = {
         return [
-            Setting(name: "Setting", imageName: "settings"),
-            Setting(name: "Terms & Privacy Policy", imageName: "privacy"),
-            Setting(name: "Send Feedback", imageName: "feedback"),
-            Setting(name: "Help", imageName: "help"),
-            Setting(name: "Switch Account", imageName: "switch_account"),
-            Setting(name: "Cancel", imageName: "cancel")
+            Setting(name: SettingName.Settings, imageName: "settings"),
+            Setting(name: SettingName.TermsPrivacy, imageName: "privacy"),
+            Setting(name: SettingName.SendFeedback, imageName: "feedback"),
+            Setting(name: SettingName.Help, imageName: "help"),
+            Setting(name: SettingName.SwitchAccount, imageName: "switch_account"),
+            Setting(name: SettingName.Cancel, imageName: "cancel")
         ]
     }()
 
@@ -57,7 +66,6 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
 
             // to disapear blackView when user taps screen
             blackView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleDismiss)))
-
 
             window.addSubview(blackView)
             window.addSubview(collectionView) // add collectionView after blackView
@@ -93,7 +101,7 @@ class SettingsLauncher: NSObject, UICollectionViewDataSource, UICollectionViewDe
 
         }) { (completed: Bool) in
             // != "" dismisses when we tap off of the menu
-            if setting.name != "" && setting.name != "Cancel" {
+            if setting.name != .Cancel {
                 self.homeController?.showControllerForSetting(setting)
             }
         }
