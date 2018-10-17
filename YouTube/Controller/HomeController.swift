@@ -12,6 +12,7 @@ import UIKit
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     var videos: [Video]? // it could be nothing
+    let cellId = "cellId"
 
     func fetchVideos() {
         // added in 'videos:' parameter
@@ -35,15 +36,29 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20)
         navigationItem.titleView = titleLabel
 
+        setupCollectionView()
+        setupMenuBar()
+        setupNavBarButtons()
+    }
+
+    func setupCollectionView() {
+
+        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .horizontal
+            flowLayout.minimumLineSpacing = 0
+        }
+
         collectionView?.backgroundColor = UIColor.white
 
-        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
+        // register cell
+//        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
 
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
 
-        setupMenuBar()
-        setupNavBarButtons()
+        // only display one cell at a time in the view
+        collectionView?.isPagingEnabled = true
     }
 
     func setupNavBarButtons() {
@@ -56,8 +71,40 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
 
     @objc func handleSearch() {
+        // implement scroll
+        scrollToMenuIndex(2)
 
     }
+
+    func scrollToMenuIndex(_ menuIndex: Int) {
+        let indexPath = IndexPath(item: menuIndex, section: 0)
+        collectionView?.scrollToItem(at: indexPath, at: [], animated: true)
+    }
+
+    lazy var menuBar: MenuBar = {
+        let mb = MenuBar()
+        mb.homeController = self // references entire controller
+        return mb
+    }()
+
+    private func setupMenuBar() {
+
+        // Hides navigation title bar on swipe
+        navigationController?.hidesBarsOnSwipe = true
+
+        let redView = UIView()
+        redView.backgroundColor = UIColor.rgb(red: 320, green: 32, blue: 31)
+        view.addSubview(redView)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: redView)
+        view.addConstraintsWithFormat(format: "V:[v0(50)]", views: redView)
+
+        view.addSubview(menuBar)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
+        view.addConstraintsWithFormat(format: "V:[v0(50)]", views: menuBar)
+
+        menuBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+    }
+
 
     // Any time you use a lazy var instanciation, the block of code only gets called once if this variable, settingsLauncher, is nil
     lazy var settingsLauncher: SettingsLauncher = {
@@ -85,31 +132,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationController?.pushViewController(dummySettingsViewController, animated: true)
     }
 
-    let menuBar: MenuBar = {
-        let mb = MenuBar()
-        return mb
-    }()
-
-    private func setupMenuBar() {
-
-        // Hides navigation title bar on swipe
-        navigationController?.hidesBarsOnSwipe = true
-
-        let redView = UIView()
-        redView.backgroundColor = UIColor.rgb(red: 320, green: 32, blue: 31)
-        view.addSubview(redView)
-        view.addConstraintsWithFormat(format: "H:|[v0]|", views: redView)
-        view.addConstraintsWithFormat(format: "V:[v0(50)]", views: redView)
-
-        view.addSubview(menuBar)
-        view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
-        view.addConstraintsWithFormat(format: "V:[v0(50)]", views: menuBar)
-
-        menuBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-    }
-
-
-
 
     func CGRectMake(_ x: CGFloat, _ y: CGFloat, _ width: CGFloat, _ height: CGFloat) -> CGRect {
         // Added this formula to follow tutorial which used CGRectMake
@@ -117,31 +139,67 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return CGRect(x: x, y: y, width: width, height: height)
     }
 
+    // CollectionView is a subclass of UIScrollView
+    // This provides the animation of the white bar
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(scrollView.contentOffset.x)
+        // divide by 4 because there are four options in menu bar
+        menuBar.horizontalBarLeftAnchorContraint?.constant = scrollView.contentOffset.x / 4
+    }
 
+    // find the target of the collectionView whenever you scroll
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+
+        let index = targetContentOffset.pointee.x / view.frame.width
+        let indexPath = IndexPath(item: Int(index), section: 0)
+        menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
+
+    }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-
-        // videos is optional
-        return videos?.count ?? 0
+        return 4
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
-
-        // videos is optional
-        cell.video = videos?[indexPath.item]
         
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+
+        let colors: [UIColor] = [.blue, .green, .red, .purple]
+        cell.backgroundColor = colors[indexPath.item]
+
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let height = (view.frame.width - 16 - 16) * 9 / 16
-        return CGSize(width: view.frame.width, height: height + 16 + 88) // 68 based on Verticle constraints (8,16,44)
+        return CGSize(view.frame.width, view.frame.height)
     }
 
-    // remove extra spacing between cells
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
+
+    // MARK: - CollectionView Functions
+
+//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//
+//        // videos is optional
+//        return videos?.count ?? 0
+//    }
+//
+//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
+//
+//        // videos is optional
+//        cell.video = videos?[indexPath.item]
+//
+//        return cell
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+//        let height = (view.frame.width - 16 - 16) * 9 / 16
+//        return CGSize(width: view.frame.width, height: height + 16 + 88) // 68 based on Verticle constraints (8,16,44)
+//    }
+//
+//    // remove extra spacing between cells
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 0
+//    }
 
 }

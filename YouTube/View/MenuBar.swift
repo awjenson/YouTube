@@ -22,6 +22,9 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     let cellId = "cellId"
     let imageNames = ["home", "trending", "subscriptions", "account"]
 
+    // create reference to homeController
+    var homeController: HomeController?
+
     // created so it can be access in multiple methods
     var horizontalBarLeftAnchorContraint: NSLayoutConstraint?
 
@@ -66,13 +69,15 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 
-        // get bar to position itself under the selected menu bar item
-        let x = CGFloat(indexPath.item) * frame.width / 4
-        horizontalBarLeftAnchorContraint?.constant = x
+//        // get bar to position itself under the selected menu bar item
+//        let x = CGFloat(indexPath.item) * frame.width / 4
+//        horizontalBarLeftAnchorContraint?.constant = x
+//
+//        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+//            self.layoutIfNeeded()
+//        }, completion: nil)
 
-        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
-            self.layoutIfNeeded()
-        }, completion: nil)
+        homeController?.scrollToMenuIndex(indexPath.item)
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

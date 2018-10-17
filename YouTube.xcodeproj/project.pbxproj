@@ -76,12 +76,12 @@
 		DA6EE587215C62290026C5BC /* YouTube */ = {
 			isa = PBXGroup;
 			children = (
+				DA6EE588215C62290026C5BC /* AppDelegate.swift */,
 				DAB9F6E62176B5E3009A6123 /* ApiService */,
 				DA255B3E2168460700AA18EF /* Model */,
 				DAF0CE9721659F6D005FB128 /* View */,
 				DAF0CE9A21659FCD005FB128 /* Controller */,
 				DAF0CE9421659ECF005FB128 /* Helpers */,
-				DA6EE588215C62290026C5BC /* AppDelegate.swift */,
 				DA6EE58C215C62290026C5BC /* Main.storyboard */,
 				DA6EE58F215C622A0026C5BC /* Assets.xcassets */,
 				DA6EE591215C622A0026C5BC /* LaunchScreen.storyboard */,
