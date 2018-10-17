@@ -11,22 +11,13 @@ import UIKit
 // To change cell sizes we must conform to UICollectionViewDelegateFlowLayout
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    var videos: [Video]? // it could be nothing
+    // MARK: - Properties
     let cellId = "cellId"
+    let titles = ["Home", "Trending", "Subscriptions", "Account"]
 
-    func fetchVideos() {
-        // added in 'videos:' parameter
-        ApiSerivce.sharedInstance.fetchVideos { (videos: [Video]) in
-
-            self.videos = videos
-            self.collectionView?.reloadData()
-        }
-    }
-
+    // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        fetchVideos()
 
         navigationController?.navigationBar.isTranslucent = false
 
@@ -51,8 +42,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.backgroundColor = UIColor.white
 
         // register cell
-//        collectionView?.register(VideoCell.self, forCellWithReuseIdentifier: "cellId")
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
 
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
@@ -79,6 +69,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func scrollToMenuIndex(_ menuIndex: Int) {
         let indexPath = IndexPath(item: menuIndex, section: 0)
         collectionView?.scrollToItem(at: indexPath, at: [], animated: true)
+
+        setTitleForIndex(menuIndex)
+    }
+
+    private func setTitleForIndex(_ index: Int) {
+        // display menu title
+        if let titleLabel = navigationItem.titleView as? UILabel {
+            titleLabel.text = "  \(titles[index])" // two blank spaces
+        }
     }
 
     lazy var menuBar: MenuBar = {
@@ -154,6 +153,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let indexPath = IndexPath(item: Int(index), section: 0)
         menuBar.collectionView.selectItem(at: indexPath, animated: true, scrollPosition: [])
 
+        setTitleForIndex(Int(index))
     }
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -164,42 +164,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
 
-        let colors: [UIColor] = [.blue, .green, .red, .purple]
-        cell.backgroundColor = colors[indexPath.item]
-
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(view.frame.width, view.frame.height)
+        return CGSize(view.frame.width, view.frame.height - 50) // 50 comes from the size of the menuBar
     }
 
 
-    // MARK: - CollectionView Functions
 
-//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//
-//        // videos is optional
-//        return videos?.count ?? 0
-//    }
-//
-//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! VideoCell
-//
-//        // videos is optional
-//        cell.video = videos?[indexPath.item]
-//
-//        return cell
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        let height = (view.frame.width - 16 - 16) * 9 / 16
-//        return CGSize(width: view.frame.width, height: height + 16 + 88) // 68 based on Verticle constraints (8,16,44)
-//    }
-//
-//    // remove extra spacing between cells
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
 
 }

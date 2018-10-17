@@ -17,6 +17,7 @@
 		DA90D2602170E75B005A4F5A /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90D25F2170E75B005A4F5A /* SettingsLauncher.swift */; };
 		DA90D2622170F144005A4F5A /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90D2612170F144005A4F5A /* SettingCell.swift */; };
 		DAB9F6E82176B60F009A6123 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB9F6E72176B60F009A6123 /* ApiService.swift */; };
+		DAB9F6EA2177BAED009A6123 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB9F6E92177BAED009A6123 /* FeedCell.swift */; };
 		DAF0CE9621659EEE005FB128 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF0CE9521659EEE005FB128 /* Extensions.swift */; };
 		DAF0CE9921659F98005FB128 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF0CE9821659F98005FB128 /* VideoCell.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,7 @@
 		DA90D25F2170E75B005A4F5A /* SettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		DA90D2612170F144005A4F5A /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
 		DAB9F6E72176B60F009A6123 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		DAB9F6E92177BAED009A6123 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		DAF0CE9521659EEE005FB128 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DAF0CE9821659F98005FB128 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -112,6 +114,7 @@
 				DAF0CE9821659F98005FB128 /* VideoCell.swift */,
 				DA255B3C2166E00700AA18EF /* MenuBar.swift */,
 				DA90D2612170F144005A4F5A /* SettingCell.swift */,
+				DAB9F6E92177BAED009A6123 /* FeedCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -197,6 +200,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA6EE58B215C62290026C5BC /* HomeController.swift in Sources */,
+				DAB9F6EA2177BAED009A6123 /* FeedCell.swift in Sources */,
 				DA255B402168461700AA18EF /* Video.swift in Sources */,
 				DA90D2622170F144005A4F5A /* SettingCell.swift in Sources */,
 				DAF0CE9921659F98005FB128 /* VideoCell.swift in Sources */,
