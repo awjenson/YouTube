@@ -16,6 +16,7 @@
 		DA6EE593215C622A0026C5BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA6EE591215C622A0026C5BC /* LaunchScreen.storyboard */; };
 		DA90D2602170E75B005A4F5A /* SettingsLauncher.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90D25F2170E75B005A4F5A /* SettingsLauncher.swift */; };
 		DA90D2622170F144005A4F5A /* SettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA90D2612170F144005A4F5A /* SettingCell.swift */; };
+		DAB9F6E82176B60F009A6123 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB9F6E72176B60F009A6123 /* ApiService.swift */; };
 		DAF0CE9621659EEE005FB128 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF0CE9521659EEE005FB128 /* Extensions.swift */; };
 		DAF0CE9921659F98005FB128 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF0CE9821659F98005FB128 /* VideoCell.swift */; };
 /* End PBXBuildFile section */
@@ -32,6 +33,7 @@
 		DA6EE594215C622A0026C5BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA90D25F2170E75B005A4F5A /* SettingsLauncher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsLauncher.swift; sourceTree = "<group>"; };
 		DA90D2612170F144005A4F5A /* SettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingCell.swift; sourceTree = "<group>"; };
+		DAB9F6E72176B60F009A6123 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		DAF0CE9521659EEE005FB128 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DAF0CE9821659F98005FB128 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -74,6 +76,7 @@
 		DA6EE587215C62290026C5BC /* YouTube */ = {
 			isa = PBXGroup;
 			children = (
+				DAB9F6E62176B5E3009A6123 /* ApiService */,
 				DA255B3E2168460700AA18EF /* Model */,
 				DAF0CE9721659F6D005FB128 /* View */,
 				DAF0CE9A21659FCD005FB128 /* Controller */,
@@ -85,6 +88,14 @@
 				DA6EE594215C622A0026C5BC /* Info.plist */,
 			);
 			path = YouTube;
+			sourceTree = "<group>";
+		};
+		DAB9F6E62176B5E3009A6123 /* ApiService */ = {
+			isa = PBXGroup;
+			children = (
+				DAB9F6E72176B60F009A6123 /* ApiService.swift */,
+			);
+			path = ApiService;
 			sourceTree = "<group>";
 		};
 		DAF0CE9421659ECF005FB128 /* Helpers */ = {
@@ -190,6 +201,7 @@
 				DA90D2622170F144005A4F5A /* SettingCell.swift in Sources */,
 				DAF0CE9921659F98005FB128 /* VideoCell.swift in Sources */,
 				DA90D2602170E75B005A4F5A /* SettingsLauncher.swift in Sources */,
+				DAB9F6E82176B60F009A6123 /* ApiService.swift in Sources */,
 				DAF0CE9621659EEE005FB128 /* Extensions.swift in Sources */,
 				DA6EE589215C62290026C5BC /* AppDelegate.swift in Sources */,
 				DA255B3D2166E00700AA18EF /* MenuBar.swift in Sources */,
