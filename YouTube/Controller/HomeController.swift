@@ -13,6 +13,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 
     // MARK: - Properties
     let cellId = "cellId"
+    let trendingCellId = "trendingCellId"
+    let subscriptionCellId = "subscriptionCellId"
     let titles = ["Home", "Trending", "Subscriptions", "Account"]
 
     // MARK: - Lifecycle Methods
@@ -43,6 +45,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
 
         // register cell
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(TrendingCell.self, forCellWithReuseIdentifier: trendingCellId)
+        collectionView?.register(SubscriptionCell.self, forCellWithReuseIdentifier: subscriptionCellId)
+
 
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
@@ -138,6 +143,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return CGRect(x: x, y: y, width: width, height: height)
     }
 
+    // MARK: - ScrollView Methods
+
     // CollectionView is a subclass of UIScrollView
     // This provides the animation of the white bar
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -156,13 +163,25 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         setTitleForIndex(Int(index))
     }
 
+    // MARK: - CollectionView Methods
+
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 4
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+
+        let identifier: String
+
+        if indexPath.item == 1 {
+            identifier = trendingCellId
+        } else if indexPath.item == 2 {
+            identifier = subscriptionCellId
+        } else {
+            identifier = cellId
+        }
+
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath)
 
         return cell
     }
