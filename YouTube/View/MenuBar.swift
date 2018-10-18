@@ -39,7 +39,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
 
         let selectedIndexPath = IndexPath(item: 0, section: 0)
-        collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .top)
+        collectionView.selectItem(at: selectedIndexPath, animated: false, scrollPosition: .bottom)
 
         setupHorizontalBar()
 
@@ -48,8 +48,6 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-
 
     func setupHorizontalBar() {
         let horizontalBarView = UIView()

@@ -34,14 +34,12 @@ class VideoCell: BaseCell {
             setupThumbnailImage()
             setupProfileImage()
 
-
-
             if let channelName = video?.channel?.name, let numberOfViews = video?.numberOfViews {
 
                 let numberFormatter = NumberFormatter()
                 numberFormatter.numberStyle = .decimal
 
-                let subtitleText = "\(channelName) • \(numberFormatter.string(from: numberOfViews)!) • 2 years ago"
+                let subtitleText = "\(channelName) • \(numberFormatter.string(from: NSNumber(value: numberOfViews))!) • 2 years ago "
                 subtitleTextView.text = subtitleText
             }
 
@@ -139,12 +137,13 @@ class VideoCell: BaseCell {
         addConstraintsWithFormat(format: "H:|-16-[v0(44)]", views: userProfileImageView)
 
         // Verticle constraints
-        addConstraintsWithFormat(format: "V:|-16-[v0]-8-[v1(44)]-36-[v2(1)]|", views: thumbnailImageView, userProfileImageView, seperatorView)
+        addConstraintsWithFormat(format: "V:|-16-[v0]-8-[v1(44)]-16-[v2(1)]|", views: thumbnailImageView, userProfileImageView, seperatorView)
 
         addConstraintsWithFormat(format: "H:|[v0]|", views: seperatorView)
 
-        addConstraintsWithFormat(format: "V:[v0(20)]", views: titleLabel)
-        //        addConstraintsWithFormat(format: "H:|[v0]|", views: titleLabel)
+        // MARK: Many no longer need
+//        addConstraintsWithFormat(format: "V:[v0(20)]", views: titleLabel)
+
 
         ///////
 

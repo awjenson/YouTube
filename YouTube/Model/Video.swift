@@ -8,17 +8,18 @@
 
 import UIKit
 
-class Video: NSObject {
+class Video: Decodable {
 
     var thumbnailImageName: String?
     var title: String?
-    var numberOfViews: NSNumber?
-    var uploadDate: NSDate?
+    var numberOfViews: Int?
+    var uploadDate: Date?
 
     var channel: Channel?
+
 }
 
-class Channel: NSObject {
+class Channel: Decodable {
     var name: String?
     var profileImageName: String?
 }

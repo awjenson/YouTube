@@ -20,6 +20,7 @@
 		DAB9F6EA2177BAED009A6123 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB9F6E92177BAED009A6123 /* FeedCell.swift */; };
 		DAB9F6EC2177DF9F009A6123 /* TrendingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB9F6EB2177DF9F009A6123 /* TrendingCell.swift */; };
 		DAB9F6EE2177E226009A6123 /* SubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB9F6ED2177E226009A6123 /* SubscriptionCell.swift */; };
+		DAB9F6F0217824F8009A6123 /* SettingName.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAB9F6EF217824F8009A6123 /* SettingName.swift */; };
 		DAF0CE9621659EEE005FB128 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF0CE9521659EEE005FB128 /* Extensions.swift */; };
 		DAF0CE9921659F98005FB128 /* VideoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF0CE9821659F98005FB128 /* VideoCell.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +41,7 @@
 		DAB9F6E92177BAED009A6123 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		DAB9F6EB2177DF9F009A6123 /* TrendingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCell.swift; sourceTree = "<group>"; };
 		DAB9F6ED2177E226009A6123 /* SubscriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCell.swift; sourceTree = "<group>"; };
+		DAB9F6EF217824F8009A6123 /* SettingName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingName.swift; sourceTree = "<group>"; };
 		DAF0CE9521659EEE005FB128 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DAF0CE9821659F98005FB128 /* VideoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -59,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				DA255B3F2168461700AA18EF /* Video.swift */,
+				DAB9F6EF217824F8009A6123 /* SettingName.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				DA90D2622170F144005A4F5A /* SettingCell.swift in Sources */,
 				DAF0CE9921659F98005FB128 /* VideoCell.swift in Sources */,
 				DA90D2602170E75B005A4F5A /* SettingsLauncher.swift in Sources */,
+				DAB9F6F0217824F8009A6123 /* SettingName.swift in Sources */,
 				DAB9F6E82176B60F009A6123 /* ApiService.swift in Sources */,
 				DAF0CE9621659EEE005FB128 /* Extensions.swift in Sources */,
 				DA6EE589215C62290026C5BC /* AppDelegate.swift in Sources */,
