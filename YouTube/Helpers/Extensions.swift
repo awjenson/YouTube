@@ -35,7 +35,7 @@ extension UIView {
 }
 
 // Save user's phone memory with image cache when displaying images
-let imageCache = NSCache<AnyObject, AnyObject>()
+let imageCache = NSCache<NSString, UIImage>()
 
 class CustomImageView: UIImageView {
 
@@ -49,7 +49,7 @@ class CustomImageView: UIImageView {
 
         image = nil
 
-        if let imageFromCache = imageCache.object(forKey: urlString as AnyObject) as? UIImage {
+        if let imageFromCache = imageCache.object(forKey: urlString as NSString) {
             self.image = imageFromCache
             return
         }
@@ -71,7 +71,7 @@ class CustomImageView: UIImageView {
                 }
 
                 // store image in imageCache
-                imageCache.setObject(imageToCache!, forKey: urlString as AnyObject)
+                imageCache.setObject(imageToCache!, forKey: urlString as NSString)
             })
         }.resume()
     }

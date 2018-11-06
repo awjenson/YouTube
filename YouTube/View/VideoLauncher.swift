@@ -77,8 +77,8 @@ class VideoPlayerView: UIView {
     lazy var videoSlider: UISlider = {
         let slider = UISlider()
         slider.translatesAutoresizingMaskIntoConstraints = false
-        slider.minimumTrackTintColor = .red
-        slider.minimumTrackTintColor = .white
+        slider.minimumTrackTintColor = UIColor.red
+        slider.minimumTrackTintColor = UIColor.white
         slider.setThumbImage(UIImage(named: "thumb"), for: .normal)
 
         slider.addTarget(self, action: #selector(handleSliderChange), for: .valueChanged)

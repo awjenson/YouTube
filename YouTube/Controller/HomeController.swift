@@ -17,6 +17,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     let subscriptionCellId = "subscriptionCellId"
     let titles = ["Home", "Trending", "Subscriptions", "Account"]
 
+
+
     // MARK: - Lifecycle Methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +34,10 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         setupCollectionView()
         setupMenuBar()
         setupNavBarButtons()
+
+        let model = VideoModel()
+        model.getFeedVideos()
+
     }
 
     func setupCollectionView() {
